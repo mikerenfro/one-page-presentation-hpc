@@ -17,6 +17,7 @@
 \setbeamercolor{block title}{bg=black,fg=white}
 \setbeamercolor{block body}{bg=black,fg=white}
 \setbeamercolor{box1}{bg=black,fg=white}
+
 \usebackgroundtemplate%
 {%
     \includegraphics[width=\paperwidth,height=\paperheight]{hpc-background}%
@@ -25,6 +26,9 @@
 \newcommand{\highopacity}{1.0}
 \newcommand{\lowopacity}{0.65}
 \newenvironment{opaque}{\pgfsetfillopacity{\highopacity}}{\pgfsetfillopacity{\lowopacity}}
+\newenvironment<>{opaqueblock}[1][]%
+{\begin{block}{\begin{opaque}#1\end{opaque}}\begin{opaque}}%
+{\end{opaque}\end{block}}
 \settoheight{\navigationsymbolheight}{\NoHyper\insertframenavigationsymbol}
 % In case we need to adjust an image or logo placement to use space left by removing navigation symbols
 \setbeamertemplate{navigation symbols}{}
@@ -33,45 +37,40 @@
   \pgfsetfillopacity{\lowopacity}
   \begin{columns}[t]
     \begin{column}{0.49\textwidth}
-      
-      \begin{block}{\begin{opaque}\textbf{Very} Brief Introduction to High Performance Computing at Tennessee Tech\end{opaque}}
-      \end{block}
-      \begin{block}{\begin{opaque}Mike Renfro, PhD: \href{mailto:renfro@tntech.edu}{renfro@tntech.edu}\end{opaque}}
-        \begin{opaque}\begin{itemize}
+      \begin{opaqueblock}[\textbf{Very} Brief Intro to Research Computing and Data Services at Tennessee Tech]
+      \end{opaqueblock}
+      \begin{opaqueblock}[Mike Renfro, PhD: \href{mailto:renfro@tntech.edu}{renfro@tntech.edu}]
+        \begin{itemize}
+          \item HPC Systems Administrator, NSF XSEDE Campus Champion, Proposal Consultant
+          \item Clement 224
           \item \href{https://www.hpc.tntech.edu/}{www.hpc.tntech.edu}
-          \item HPC Systems Administrator
-          \item NSF XSEDE Campus Champion
-        \end{itemize}\end{opaque}
-      \end{block}
-      \begin{block}{\begin{opaque}Hardware:\end{opaque}}
-      \begin{opaque}\begin{itemize}
-        \item 44 28-core compute servers, including 8 GPUs
-        \item 64--896 GB RAM per server
-      \end{itemize}\end{opaque}
-      \end{block}
-      \begin{block}{\begin{opaque}OS and Software:\end{opaque}}
-        \begin{opaque}\begin{itemize}
+        \end{itemize}
+      \end{opaqueblock}
+      \begin{opaqueblock}[Hardware and software:]
+        \begin{itemize}
+          \item 44 28-core compute servers, 8 GPUs (adding 10 128-core servers, 20 GPUs in Fall 2021)
+          \item 64--896 GB RAM per server
           \item Red Hat and CentOS Linux
           \item Lots of installed applications (and you can add some of your own)
-        \end{itemize}\end{opaque}
-      \end{block}
-  \end{column}
+        \end{itemize}
+      \end{opaqueblock}
+    \end{column}
     \begin{column}{0.49\textwidth}
-      \begin{block}{\begin{opaque}Usage to date:\end{opaque}}
-        \centering
-        \begin{tikzpicture}
-          \begin{opaque}
-          \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.35\paperwidth]{hpc-usage}};
-          \end{opaque}
-          \begin{scope}[x={(image.south east)},y={(image.north west)}]
-            \node[align=center,black] at (0.6, 0.45) {{\DTLforeach{jobs}{\totaljobs=Column1}{\prefixSI{\totaljobs}{\prefix\nothing}}}
- jobs completed,\\ \DTLforeach{hours}{\totalcpuhours=Column1}{\prefixSI{\totalcpuhours}{\prefix\nothing}}
- CPU-hours delivered};
-          \end{scope}
-        \end{tikzpicture}
-      \end{block}
-      \begin{block}{\begin{opaque}Common job types:\end{opaque}}
-        \begin{opaque}\begin{itemize}
+      \begin{opaqueblock}[HPC usage since Fall 2017:]
+        \begin{center} \vskip-0.7\baselineskip
+          \begin{tikzpicture}
+              \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.33\paperwidth]{hpc-usage}};
+            \begin{scope}[x={(image.south east)},y={(image.north west)}]
+              \node[align=center,black] at (0.6, 0.4) {
+                \DTLforeach{jobs}{\totaljobs=Column1}{\prefixSI{\totaljobs}{\prefix\nothing}} jobs, \\
+                \DTLforeach{hours}{\totalcpuhours=Column1}{\prefixSI{\totalcpuhours}{\prefix\nothing}} core-hours
+                };
+            \end{scope}
+          \end{tikzpicture}
+        \end{center}
+      \end{opaqueblock}
+      \begin{opaqueblock}[Research areas supported (so far):]
+        \begin{itemize}
           \item Molecular dynamics
           \item Computational fluid dynamics
           \item Artificial intelligence/machine learning
@@ -79,8 +78,8 @@
           \item Genomics
           \item Environmental science
           \item Computational solid mechanics
-        \end{itemize}\end{opaque}
-      \end{block}
+        \end{itemize}
+      \end{opaqueblock}
     \end{column}
   \end{columns}
 \end{frame}
