@@ -1,4 +1,4 @@
-URL := https://xdmod.your.site/controllers/user_interface.php
+URL := https://xdmod.hpc.tntech.edu/controllers/user_interface.php
 OPTS := -s -X POST -H "Content-Type: application/x-www-form-urlencoded"
 START_DATE := 2001-01-01
 UNAME_S := $(shell uname -s)
@@ -29,6 +29,6 @@ data:
 	# echo $(START_DATE)
 	# echo $(END_DATE_GRAPH) $(END_DATE_TEXT)
 
-# %.pdf: data %.tex
-%.pdf: %.tex
+%.pdf: data %.tex
+# %.pdf: %.tex
 	$(TEXPATH)/latexmk -quiet -pdf -synctex=1 $(patsubst %.pdf,%.tex,$@)
